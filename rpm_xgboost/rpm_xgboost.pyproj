@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>87a3cacf-4670-4b04-925b-346130604ac3</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>rpm_xgboost.py</StartupFile>
+    <StartupFile>main_skcv_gpu2.0.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,7 +22,35 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="rpm_xgboost.py" />
+    <Compile Include="attribute_tocsv_embeding.py" />
+    <Compile Include="attribute_tocsv_without_embeding.py" />
+    <Compile Include="attribute_totxt.py" />
+    <Compile Include="change_attribute_format%28Win6%29_y - lx.py" />
+    <Compile Include="chemical_properties.py" />
+    <Compile Include="exclude1_2.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="get_data.py" />
+    <Compile Include="grid_search.py" />
+    <Compile Include="main_skcv_gpu.py" />
+    <Compile Include="main_skcv_gpu2.0.py" />
+    <Compile Include="main_xgcv_cpu.py" />
+    <Compile Include="plot_importance.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="plot.py" />
+    <Compile Include="calculate.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\data9.0.txt" />
+    <Content Include="data\diabetes.csv" />
+    <Content Include="data\ion2_pif_0.8_y.txt" />
+    <Content Include="data\mobile_dd.txt" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

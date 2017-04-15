@@ -10,15 +10,20 @@ if __name__ =='__main__':
     xgb_model=XGBRegressor(
         silent=0,
       #  updater='grow_gpu'
+     max_depth=8,
+       n_estimators=1000,
+      min_child_weight=0,
+      gamma=0,
+      subsample=0.8,
+      colsample_bytree=0.8
         )
     clf=GridSearchCV(xgb_model,
                      {
-                     'max_depth':[2,4,5,6,8],
-                     'n_estimators':[50,100,200,500,1000],
-                     'min_child_weight':1,
-                      'gamma':[i/10.0 for i in range(0,5)],
-                      'subsample':[0.6,0.8,1],
-                      'colsample_bytree':[0.8,1],
+                     
+                    
+                    
+                      
+                      
                       'reg_alpha':[0, 0.001, 0.005, 0.01, 0.05],
                       'scale_pos_weight':[0.5,0.7,0.8,1],
                      },
@@ -26,6 +31,7 @@ if __name__ =='__main__':
         )
     clf.fit(X,y)
     print clf.best_score_,clf.best_params_
+    os.system('pause')
     f=open('123.txt','w')
     f.write(clf.best_score_+clf.best_params_)
     f.close()
