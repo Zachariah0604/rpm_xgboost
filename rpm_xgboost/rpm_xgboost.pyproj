@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>87a3cacf-4670-4b04-925b-346130604ac3</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>main_skcv_gpu2.0.py</StartupFile>
+    <StartupFile>module1.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -35,6 +35,9 @@
     <Compile Include="main_skcv_gpu.py" />
     <Compile Include="main_skcv_gpu2.0.py" />
     <Compile Include="main_xgcv_cpu.py" />
+    <Compile Include="module1.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="plot_importance.py">
       <SubType>Code</SubType>
     </Compile>

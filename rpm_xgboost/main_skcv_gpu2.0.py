@@ -12,7 +12,8 @@ import matplotlib.pyplot as plt
 import time
 import random
 from calculate import *
-
+import matplotlib.pyplot as plt
+%matplotlib inline
 def get_value(list):
     return float(list[0])
 subset = 1
@@ -22,7 +23,7 @@ train_rows = int(n_rows * subset)
 #random.seed(rand_seed)
 #skip = sorted(random.sample(xrange(1,n_rows + 1),n_rows - train_rows))
 print 'loading data...'
-data = pd.read_csv('data/data_embeding_with0.csv')
+data = pd.read_csv('data/data_embeding_with.csv')
 person_list = []
 merge_list = []
 print 'DataShape: ' + str(data.shape)
