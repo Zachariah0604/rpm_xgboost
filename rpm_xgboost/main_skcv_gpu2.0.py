@@ -22,7 +22,7 @@ train_rows = int(n_rows * subset)
 #random.seed(rand_seed)
 #skip = sorted(random.sample(xrange(1,n_rows + 1),n_rows - train_rows))
 print 'loading data...'
-data = pd.read_csv('data/data_embeding_2.0.csv')
+data = pd.read_csv('data/data_embeding_with0.csv')
 person_list = []
 merge_list = []
 print 'DataShape: ' + str(data.shape)
@@ -36,19 +36,23 @@ del data['Peptide']
 predictors=[x for x in data]
 X = data.values
 params = {}
+params['eta']=0.01
+params['alpha']=0.01
 params['silent'] = 0
-#param['learning_rate'] = 0.1
+params['learning_rate'] = 0.4
 params['n_estimators'] = 1000
 params['eval_metric']='rmse'
 params['max_depth'] = 11
 params['min_child_weight'] = 20
 params['gamma'] = 0
+params['lambda']=500
 params['subsample'] = 1
 params['colsample_bytree'] = 1
 params['objective'] = 'reg:linear'
+params['early_stopping_rounds']=100
 #params['scale_pos_weight'] = 2
 params['seed'] = -1
-params['updater'] = 'grow_gpu'
+#params['updater'] = 'grow_gpu'
 plst = list(params.items())
 print 'K-Folds cross validation...'
 #cv = StratifiedKFold(label,10)
@@ -69,7 +73,7 @@ for i,(train_peptide,test_piptide) in enumerate(cv):
     xgtest=xgb.DMatrix(X[np.array(test)])
     idx.append([x+1 for x in list(test)])
     tmp = time.time()
-    bst = xgb.train(plst,xgtrain,num_boost_round=5)
+    bst = xgb.train(plst,xgtrain,num_boost_round=1000)
     boost_time = time.time() - tmp
     rmse = bst.eval(xgb.DMatrix(X[test],label=label[test]))
     print 'Fold {}:{},Boost Time {}'.format(i+1,rmse,str(boost_time))

@@ -47,8 +47,6 @@
     <Folder Include="data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="data\data9.0.txt" />
-    <Content Include="data\diabetes.csv" />
     <Content Include="data\ion2_pif_0.8_y.txt" />
     <Content Include="data\mobile_dd.txt" />
   </ItemGroup>

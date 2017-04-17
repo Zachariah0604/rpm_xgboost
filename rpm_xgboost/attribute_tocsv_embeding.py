@@ -31,7 +31,7 @@ dicHy={'A':0.16,'c':2.50,'D':-2.49,'E':-1.50,'F':5.00,'G':-3.31,'H':-4.63,'I':4.
       'T':-1.08,'V':3.02,'W':4.88,'Y':2.00}
 
 
-with open('data/data_embeding.csv','wb') as wf:
+with open('data/data_embeding_with0.csv','wb') as wf:
     writer=csv.writer(wf)
     CountOfAAInPeptide=''
     CountOfAAInYion=''
@@ -51,7 +51,7 @@ with open('data/data_embeding.csv','wb') as wf:
     writeStr='Number,Peptide,'+CountOfAAInPeptide+CountOfAAInYion+CountOfAAInBion+IsolationWidth+C_Identity+N_Identity+'IsTheSamePort,RatioOfyAndPeptide,RatioOfbAndPeptide,y_Distance,b_Distance,R_Basicity,L_Basicity,R_Helicity,L_Helicity,R_Hydrophobicity,L_Hydrophobicity,y_Basic,b_Basic,y_Helicity,b_Helicity,y_Hydrophobicity,b_Hydrophobicity,AvgOfBasic,DvalueOfBasic,AvgOfHelicity,DvalueOfHelicity,AvgOfHydrophobicity,DvalueOfHydrophobicity,y_Mass,b_Mass,DvalueOfMcratioOfyAndPep,CountOfBasicAA,y_CountOfBasicAA,b_CountOfBasicAA,LengthOfPeptide,P_Basic,P_Helicity,P_Hydrophobicity,McRatioOfPeptide,Intensity'
     writer.writerow(writeStr.split(','))
     cunt=0
-    f = open('data/mobile_dd.txt','r')
+    f = open('data/ion2_y.txt','r')
     data = [];pep_mz = 0;pep = '1';pep_b = 0;pep_he = 0;pep_hy=0
     for line in f:
         flag=False
