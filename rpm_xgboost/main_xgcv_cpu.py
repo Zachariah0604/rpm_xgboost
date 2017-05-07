@@ -84,14 +84,14 @@ def pearson_r(x,y):
     return numerator/denominator
 
 person_list=[];split_list=[]
-print 'loading data...'
+print('loading data...')
 orginal_data=pd.read_csv('data/data_embeding-2.csv')
-print 'DataShape: '+ str(orginal_data.shape)
+print('DataShape: '+ str(orginal_data.shape))
 train=orginal_data.head(16108)
-print 'Train dataset: '+str(train.Number.values)
+print('Train dataset: '+str(train.Number.values))
 test=orginal_data.loc[16108:orginal_data.shape[0]]
-print 'Test dataset: '+str(test.Number.values)
-print 'split test data...'
+print('Test dataset: '+str(test.Number.values))
+print('split test data...')
 split_list.append(get_intensity_list(test))
 split_list.append(get_peptide_list(test))
 split_list.append(get_y_Mass_list(test))
@@ -115,14 +115,14 @@ def model_fit(alg,dtrain,dtest,predictors,useTrainCV=True,cv_folds=10,early_stop
         alg.fit(dtrain[predictors], dtrain['Intensity'],eval_metric='auc')
         dtrain_predictions = alg.predict(dtest[predictors])
         #dtrain_predprob = alg.predict_proba(dtrain[predictors])[:,1]
-        print 'training complete...'
-        print 'write predict data in file'
+        print('training complete...')
+        print('write predict data in file')
 
         pred=pd.DataFrame({"id":idx,"Peptide":peptide,"Intensity":dtrain_predictions})
         pred.to_csv('data//pred.csv')
-        print 'split predict data...'
+        print('split predict data...')
         split_list.append(get_intensity_list(pred))
-        print 'calculate person coefficient..'
+        print('calculate person coefficient..')
         for i in range(len(split_list[0])):
             person_list_temp=[]
             person_list_temp.append(split_list[1][i][0])
@@ -171,7 +171,7 @@ def model_fit(alg,dtrain,dtest,predictors,useTrainCV=True,cv_folds=10,early_stop
         for i in range(len(person_list)):
             sum+=person_list[i][2]
         person_mean=sum/float(len(person_list))
-        print 'r= '+str(person_mean)
+        print('r= '+str(person_mean))
         #plot(plot_list)
 #train=np.array(train)
 #test=np.array(test)
@@ -192,5 +192,5 @@ xgb_model=XGBRegressor(
        # updater='grow_gpu'
        )
 
-print 'training model ...'
+print('training model ...')
 model_fit(xgb_model,train,test,predictors)

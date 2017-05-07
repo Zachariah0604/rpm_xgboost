@@ -93,14 +93,14 @@ n_rows = 200809
 train_rows = int(n_rows * subset)
 random.seed(rand_seed)
 #skip = sorted(random.sample(xrange(1,n_rows + 1),n_rows - train_rows))
-print 'loading data...'
+print('loading data...')
 data = pd.read_csv('data/data_embeding.csv')
 person_list = []
 split_list = []
-print 'DataShape: ' + str(data.shape)
+print('DataShape: ' + str(data.shape))
 label = data['Intensity'].values
 peptide=data['Peptide'].values
-print 'get spectrum intensity list...'
+print('get spectrum intensity list...')
 split_list.append(get_intensity_list(data))
 del data['Intensity']
 del data['Number']
@@ -124,12 +124,12 @@ params['seed'] = -1
 params['updater'] = 'grow_gpu'
 plst = list(params.items())
 num_round = 10
-print ' K-Folds cross validation...'
+print(' K-Folds cross validation...')
 #cv = StratifiedKFold(label,10)
 cv=KFold(n_rows,10,random_state=0)
-print cv
+print(cv)
 dtrain_predictions = [];idx=[];
-print 'training model ...'
+print('training model ...')
 i=0
 f=open('data//123.txt','w')
 f.write('fold\tnum_round\trmse\n')
@@ -143,7 +143,7 @@ for train,test in cv:
         bst = xgb.train(plst,xgtrain,round)
         boost_time = time.time() - tmp
         rmse = bst.eval(xgb.DMatrix(X[test],label=label[test]))
-        print 'Fold {}:{},num_round:{},Boost Time {}'.format(i+1,rmse,round,str(boost_time))
+        print('Fold {}:{},num_round:{},Boost Time {}'.format(i+1,rmse,round,str(boost_time)))
         writeStr=str(i)+'\t'+str(round)+'\t:'+str(rmse)+'\n'
         f.write(writeStr)
         del bst
@@ -152,8 +152,8 @@ for train,test in cv:
     if i==10:
         break
 f.close()
-print 'training complete...'
-print 'write predict data in file'
+print('training complete...')
+print('write predict data in file')
 pred_result=[];k=0
 for i in range(len(idx)):
     for j in range(len(idx[i])):
@@ -162,9 +162,9 @@ for i in range(len(idx)):
 pred_result.sort(key=get_value)
 pred = pd.DataFrame({"idx":[pred_result[i][0] for i in range(k)],"Peptide":peptide,"Intensity":[pred_result[i][1] for i in range(k)]})
 pred.to_csv('data//pred2.csv')
-print 'get predict spectrum intensity list...'
+print('get predict spectrum intensity list...')
 split_list.append(get_intensity_list(pred))      
-print 'calculate person coefficient..'
+print('calculate person coefficient..')
 sum_person = 0.0
 cunt2=0
 for i in range(len(split_list[0])):
@@ -175,6 +175,6 @@ for i in range(len(split_list[0])):
 for i in range(len(person_list)):
     sum_person+=person_list[i]
 person_mean = sum_person / float(len(person_list))
-print 'r= ' + str(person_mean)
+print('r= ' + str(person_mean))
 
 

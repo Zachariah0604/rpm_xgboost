@@ -3,7 +3,6 @@
 
 from numpy import *
 import numpy as np
-import cPickle as Pickle
 import random
 import csv
 """
@@ -31,7 +30,7 @@ dicHy={'A':0.16,'c':2.50,'D':-2.49,'E':-1.50,'F':5.00,'G':-3.31,'H':-4.63,'I':4.
       'T':-1.08,'V':3.02,'W':4.88,'Y':2.00}
 
 
-with open('data/data_embeding_with.csv','wb') as wf:
+with open('data/data_embeding_without0.csv','w',newline='') as wf:
     writer=csv.writer(wf)
     CountOfAAInPeptide=''
     CountOfAAInYion=''
@@ -228,14 +227,14 @@ with open('data/data_embeding_with.csv','wb') as wf:
             #if cunt==24674:
              #   break;
         except:
-            print 'catch error in' + str(cunt)+' line'
+            print('catch error in' + str(cunt)+' line')
         if flag:
             data=attribute.tolist()
             data.insert(0,cunt)
             data.insert(1,f_line[0])
             data.append(float(f_line[6].split('\n')[0]))
             writer.writerow(data)
-            print 'write '+str(cunt)+' line in file'
+            print('write '+str(cunt)+' line in file')
     f.close()
 wf.close()
 

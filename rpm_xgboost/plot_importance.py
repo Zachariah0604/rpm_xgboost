@@ -2,12 +2,12 @@
 from matplotlib import pyplot
 from xgboost import XGBRegressor
 import pandas as pd
+import xgboost as xgb
 from numpy import loadtxt
 
-dataset=loadtxt('data//data.csv',delimiter=",")
+dataset=loadtxt('data//nomalize_data_without_embeding_35.csv',delimiter=",")
 X=dataset[:,0:34]
 y=dataset[:,34]
-
 model =XGBRegressor()
 model.fit(X,y)
 

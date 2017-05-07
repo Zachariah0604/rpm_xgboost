@@ -126,10 +126,10 @@ with open('data//temp_data.csv','wb') as f:
             cunt += 1
             flag= True 
         except:
-            print 'error in ' +str(cunt)
+            print('error in ' +str(cunt))
             break
         if flag:
             writer.writerow([cunt,feature.Peptide,feature.LengthOfPeptide,feature.McRatioOfPeptide,feature.CountOfBasicAA,feature.P_Basic,feature.P_Hydrophobicity,feature.P_Helicity,feature.IsolationWidthLeft,feature.IsolationWidthRight,feature.C_Identity,feature.N_Identity,feature.L_Basicity,feature.R_Basicity,feature.L_Hydrophobicity,feature.R_Hydrophobicity,feature.L_Helicity,feature.R_Helicity,feature.AvgOfBasic,feature.AvgOfHydrophobicity,feature.AvgOfHelicity,feature.DvalueOfBasic,feature.DvalueOfHydrophobicity,feature.DvalueOfHelicity,feature.b_Distance,feature.y_Distance,feature.b_Mass,feature.y_Mass,feature.DvaleOfMcratioOfyAndPep,feature.b_Basic,feature.y_Basic,feature.b_Hydrophobicity,feature.y_Hydrophobicity,feature.b_Helicity,feature.y_Helicity,feature.b_CountOfBasicAA,feature.y_CountOfBasicAA,feature.MassOfPeptide,feature.RatioOfbAndPeptide,feature.RatioOfyAndPeptide,feature.IsTheSamePort,feature.Intensity])
-            print 'write ' + str(cunt) + ' line '
+            print('write ' + str(cunt) + ' line ')
            
 f.close()

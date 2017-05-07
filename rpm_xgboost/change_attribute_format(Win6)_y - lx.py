@@ -3,7 +3,7 @@
 
 from numpy import *
 import numpy
-import cPickle as Pickle
+#import cPickle as Pickle
 import random
 import csv
 """
@@ -143,7 +143,7 @@ with open('data\\lx-data_peptide_pif_0.8_y.csv','w') as f1:
         data.insert(1,f_line[0])
         data.append(float(f_line[6].split('\n')[0]))
         writer.writerow(data)
-        print 'write '+str(cunt)+' line in file'
+        print('write '+str(cunt)+' line in file')
     f.close()
 f1.close()
 

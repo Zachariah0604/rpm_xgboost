@@ -30,7 +30,7 @@ if __name__ =='__main__':
                      verbose=1
         )
     clf.fit(X,y)
-    print clf.best_score_,clf.best_params_
+    print(clf.best_score_,clf.best_params_)
     os.system('pause')
     f=open('123.txt','w')
     f.write(clf.best_score_+clf.best_params_)
