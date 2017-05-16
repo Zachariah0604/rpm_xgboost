@@ -23,7 +23,7 @@ train_rows = int(n_rows * subset)
 #random.seed(rand_seed)
 #skip = sorted(random.sample(xrange(1,n_rows + 1),n_rows - train_rows))
 print('loading data...')
-data = pd.read_csv('data//data_embeding_without0.csv')
+data = pd.read_csv('data//data_embeding.csv')
 person_list = []
 merge_list = []
 print('DataShape: ' + str(data.shape))
@@ -39,12 +39,12 @@ X = data.values
 params = {}
 
 params['eta']=0.01
-params['alpha']=0.01
-params['silent'] = 0
+params['alpha']=0.005
+params['silent'] = 1
 params['learning_rate'] = 0.4
 params['n_estimators'] = 1000
 params['eval_metric']='rmse'
-params['max_depth'] = 11 
+params['max_depth'] = 8 
 params['min_child_weight'] = 0
 params['gamma'] = 0
 params['lambda']=500
@@ -53,7 +53,7 @@ params['colsample_bytree'] = 0.6
 params['objective'] = 'reg:linear'
 #params['early_stopping_rounds']=100
 params['seed'] = -1
-params['updater'] = 'grow_gpu'
+#params['updater'] = 'grow_gpu'
 plst = list(params.items())
 print('K-Folds cross validation...')
 #cv = StratifiedKFold(label,10)
@@ -71,10 +71,10 @@ for i,(train_peptide,test_piptide) in enumerate(cv):
     train=get_split_list(train_peptide)
     test=get_split_list(test_piptide) 
     xgtrain = xgb.DMatrix(X[np.array(train)],label=label[np.array(train)])
-    xgtest=xgb.DMatrix(X[np.array(test)])
+    xgtest=xgb.DMatrix(X[np.array(test).astype(int)])
     idx.append([x+1 for x in list(test)])
     tmp = time.time()
-    bst = xgb.train(plst,xgtrain,num_boost_round=10)
+    bst = xgb.train(plst,xgtrain,num_boost_round=94)
     #bst.save_model('model2//'+str(i)+'.model')
     ##dump model
     #bst.dump_model('model2//'+str(i)+'.dump.raw.txt')
@@ -82,9 +82,9 @@ for i,(train_peptide,test_piptide) in enumerate(cv):
     #bst.dump_model('model2//'+str(i)+'.dump.nice.txt','data//featmap.txt')
    
     boost_time = time.time() - tmp
-    rmse = bst.eval(xgb.DMatrix(X[test],label=label[test]))
+    #rmse = bst.eval(xgb.DMatrix(X[test],label=label[test]))
     
-    print('Fold {}:{},Boost Time {}'.format(i+1,rmse,str(boost_time)))
+    print('Fold {}:,Boost Time {}'.format(i+1,str(boost_time)))
     dtrain_predictions.append(bst.predict(xgtest))
     del bst
 print('training complete...')
@@ -101,13 +101,14 @@ print('get predict spectrum intensity list...')
 merge_list.append(get_merge_list(pred))      
 print('calculate person coefficient..')
 sum_person = 0.0
-def get_pearson_x(len_of_peptide,m):
+def get_pearson_x(len_of_peptide,pos,m):
     x=[]
-    for j in range(len(merge_list[0][len_of_peptide])):
-        x.append(merge_list[m][len_of_peptide][j][1])
+    for j in range(len(merge_list[0][pos])):
+        x.append(merge_list[m][pos][j][1])
     return x
 for i in range(len(merge_list[0])):
-    person_list.append(pearson_r(get_pearson_x(len(merge_list[0][i]),0),get_pearson_x(len(merge_list[1][i]),1)))
+    person_list.append(pearson_r(get_pearson_x(len(merge_list[0][i]),i,0),get_pearson_x(len(merge_list[1][i]),i,1)))
+
 for i in range(len(person_list)):
     sum_person+=person_list[i]
 person_mean = sum_person / float(len(person_list))

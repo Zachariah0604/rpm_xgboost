@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>87a3cacf-4670-4b04-925b-346130604ac3</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>parameter_adjustment.py</StartupFile>
+    <StartupFile>normalizw.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,8 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="attribute_tocsv_embeding _2.py" />
+    <Compile Include="attribute_tocsv_embeding%28size=2%29.py" />
     <Compile Include="attribute_tocsv_embeding.py" />
     <Compile Include="attribute_tocsv_partial_embeding.py" />
     <Compile Include="attribute_tocsv_without_embeding_35.py" />
@@ -81,6 +83,8 @@
   <ItemGroup>
     <Content Include="data\featmap.txt" />
     <Content Include="data\ion2_pif_0.8_y.txt" />
+    <Content Include="data\ions_normalization.txt" />
+    <Content Include="data\mobile.txt" />
     <Content Include="data\mobile_dd.txt" />
     <Content Include="pifxiaoyu0.8\mobile.txt" />
   </ItemGroup>
